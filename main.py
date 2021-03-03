@@ -25,7 +25,7 @@ def main():
     user1.surname = "Andrey"
     user1.name = "Ridley"
     user1.age = 20
-    user1.position = "captain"
+    user1.position = "colonist"
     user1.speciality = "research engineer"
     user1.address = "module_1"
     user1.email = "andrey_chief@mars.org"
@@ -36,7 +36,7 @@ def main():
     user2.surname = "Evgeniy"
     user2.name = "Ridley"
     user2.age = 19
-    user2.position = "captain"
+    user2.position = "colonist"
     user2.speciality = "research engineer"
     user2.address = "module_1"
     user2.email = "evgeniy_chief@mars.org"
@@ -47,7 +47,7 @@ def main():
     user3.surname = "Lexa"
     user3.name = "Ridley"
     user3.age = 18
-    user3.position = "captain"
+    user3.position = "colonist"
     user3.speciality = "research engineer"
     user3.address = "module_1"
     user3.email = "lexa_chief@mars.org"
