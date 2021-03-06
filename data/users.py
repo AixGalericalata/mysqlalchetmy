@@ -1,5 +1,6 @@
 import datetime
 import sqlalchemy
+from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
 
 
@@ -16,3 +17,5 @@ class User(SqlAlchemyBase):
     email = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+
+    jobs = orm.relation("Jobs", back_populates='user')

@@ -1,9 +1,16 @@
 import datetime
 import sqlalchemy
+from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
 
 
 class Jobs(SqlAlchemyBase):
+
+    def isfinished(self):
+        if self.is_finished:
+            return 'Is finished'
+        return 'Is not finished'
+
     __tablename__ = 'jobs'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
@@ -14,3 +21,4 @@ class Jobs(SqlAlchemyBase):
     start_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
     end_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True, default=True)
+    user = orm.relation('User')
