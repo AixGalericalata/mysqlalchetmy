@@ -4,6 +4,7 @@ from werkzeug.utils import redirect
 from data import db_session
 from data.users import User
 from data.jobs import Jobs
+from forms.addjob import AddJobForm
 from forms.loginform import LoginForm
 from forms.registerform import RegisterForm
 
@@ -50,6 +51,24 @@ def logout():
     logout_user()
     return redirect("/")
 
+
+@app.route('/addjob',  methods=['GET', 'POST'])
+@login_required
+def add_news():
+    form = AddJobForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        job = Jobs()
+        job.job = form.job_title.data
+        job.team_leader = form.team_leader_id.data
+        job.work_size = form.work_size.data
+        job.collaborators = form.collaborators.data
+        job.is_finished = form.is_finished.data
+        db_sess.add(job)
+        db_sess.commit()
+        return redirect('/')
+    return render_template('addjob.html',
+                           form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
