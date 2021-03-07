@@ -2,13 +2,16 @@
 
 {% block content %}
 <h1>Works log</h1>
+<table border="1">
 {% for item in jobs%}
 <div class="col-md6 border rounded">
     <!--{% if current_user.is_authenticated %}
         <a href="news" class="btn btn-secondary">Добавить новость</a>
     {% endif %}-->
-    <table border="1">
-        <caption>Action # {{item.id}}</caption>
+        <tr class="thead">
+            <td align="center" colspan="10"><span style="font-size:140%;font-weight:bold">Action # {{item.id}}</span>
+</td>
+        </tr>
         <tr>
             <th>Title of activity</th>
             <th>Team leader</th>
@@ -22,7 +25,7 @@
             <td>{{item.collaborators}}</td>
             <td>{{item.isfinished()}}</td>
         </tr>
-    </table>
 </div>
 {% endfor %}
+</table>
 {% endblock %}
