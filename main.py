@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from werkzeug.utils import redirect
 
+from flask import make_response
 from data import db_session, jobs_api
 from data.users import User
 from data.jobs import Jobs
@@ -43,6 +44,11 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.route('/logout')
