@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from werkzeug.utils import redirect
 
-from data import db_session
+from data import db_session, jobs_api
 from data.users import User
 from data.jobs import Jobs
 from forms.addjob import AddJobForm
@@ -167,6 +167,7 @@ def fill_db():
 
 def main():
     db_session.global_init("db/blogs.db")
+    app.register_blueprint(jobs_api.blueprint)
     #  fill_db()
     app.run()
 
