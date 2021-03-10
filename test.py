@@ -12,9 +12,17 @@ print(post('http://localhost:5000/api/jobs',
 
 print(get('http://localhost:5000/api/jobs').json())
 
+print(post('http://localhost:5000/api/jobs',
+           json={'id': 666,
+                 'team_leader': 1,
+                 'job': 'Привет всем я лёха',
+                 'work_size': 45,
+                 'collaborators': '2, 3',
+                 'is_finished': False}).json())
 
 print(post('http://localhost:5000/api/jobs',
-           json={'team_leader': 1,
+           json={'id': 666,
+                 'team_leader': 1,
                  'job': 'Привет всем я лёха',
                  'work_size': 45,
                  'collaborators': '2, 3',
