@@ -61,6 +61,32 @@ def create_jobs():
     return jsonify({'success': 'OK'})
 
 
+@blueprint.route('/api/jobs', methods=['PUT'])
+def change_jobs():
+    if not request.json:
+        return jsonify({'error': 'Empty request'})
+    elif not all(key in request.json for key in
+                 ['id']):
+        return jsonify({'error': 'Bad request'})
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Jobs).filter(Jobs.id == request.json['id']).first()
+    if not jobs:
+        return jsonify({'error': 'Id not exist'})
+    if 'team_leader' in request.json:
+        jobs.team_leader = request.json['team_leader']
+    if 'collaborators' in request.json:
+        jobs.collaborators = request.json['collaborators']
+    if 'job' in request.json:
+        jobs.job = request.json['job']
+    if 'work_size' in request.json:
+        jobs.work_size = request.json['work_size']
+    if 'is_finished' in request.json:
+        jobs.is_finished = request.json['is_finished']
+    db_sess.commit()
+    return jsonify({'success': 'OK'})
+
+
+
 @blueprint.route('/api/jobs/<int:jobs_id>', methods=['DELETE'])
 def delete_jobs(jobs_id):
     db_sess = db_session.create_session()
