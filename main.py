@@ -8,6 +8,8 @@ from data.jobs import Jobs
 from forms.addjob import AddJobForm
 from forms.loginform import LoginForm
 from forms.registerform import RegisterForm
+import users_resources
+from users_resources import api
 
 from flask_login import LoginManager, login_user, login_required, logout_user
 
@@ -172,6 +174,10 @@ def fill_db():
 
 
 def main():
+
+    api.add_resource(users_resources.UsersListResource, '/api/v2/users')
+    api.add_resource(users_resources.UsersResource, '/api/v2/users/<int:user_id>')
+
     db_session.global_init("db/blogs.db")
     app.register_blueprint(jobs_api.blueprint)
     #  fill_db()
